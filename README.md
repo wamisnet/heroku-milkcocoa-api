@@ -6,7 +6,7 @@ HerokuでNodeJS(Express)をベースにした、シンプルなMilkcocoa連携�
 
 以下のHeroku Buttonを押してHerokuアプリを作成しましょう。
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/1ft-seabass/heroku-milkcocoa-api)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/kiyopikko/heroku-milkcocoa-api)
 
 ## 参考記事
 
