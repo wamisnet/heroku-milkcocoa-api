@@ -49,7 +49,7 @@ app.get('/push', function(request, response) {
     var date = new Date();
     var hour = date.getHours();
 
-    response.send(hour);
+    response.send(hour+'');
     // 内部のログ
     console.log('[push datastore : ' + MILKCOCOA_DATASTORE_ID + ']');
     console.log(request.query);
