@@ -45,15 +45,19 @@ app.get('/', function(request, response) {
 });
 
 app.get('/push', function(request, response) {
-    response.send('[push datastore]');
+
+    var date = new Date();
+    var hour = date.getHours();
+
+    response.send(hour);
     // 内部のログ
     console.log('[push datastore : ' + MILKCOCOA_DATASTORE_ID + ']');
     console.log(request.query);
-    var sendValue = "送信テスト";  // text値のデフォルトは「送信テスト」
-    if(request.query.text){
-        sendValue = request.query.text;  // text値が存在する場合、採用する。
+    var sendValue = null;  // v値のデフォルトは null
+    if(request.query.v){
+        sendValue = request.query.v;  // v値が存在する場合、採用する。
     }
-    sampleDataStore.push({ text : sendValue , host : request.headers.host });
+    sampleDataStore.push({v : sendValue});
 });
 
 app.listen(app.get('port'), function() {
