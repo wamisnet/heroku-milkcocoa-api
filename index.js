@@ -55,7 +55,29 @@ app.get('/push', function(request, response) {
     console.log(request.query);
     var sendValue = null;  // v値のデフォルトは null
     if(request.query.v){
-        sendValue = request.query.v;  // v値が存在する場合、採用する。
+        var sendValueType = request.query.type || 'string';
+        sendValueType = sendValueType.toLowerCase();
+
+        switch(request.query.type){
+            case 'string':
+                sendValue = request.query.v;
+                break;
+            case 'number':
+                sendValue = Number(request.query.v);
+                break;
+            case 'boolean':
+                sendValue = !!request.query.v;
+                break;
+            case 'bool':
+                sendValue = !!request.query.v;
+                break;
+            case 'object':
+                sendValue = JSON.parse(request.query.v);
+                break;
+            default:
+                sendValue = request.query.v;
+                break;
+        }
     }
     sampleDataStore.push({v : sendValue});
 });
