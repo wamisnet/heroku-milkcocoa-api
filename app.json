@@ -1,7 +1,7 @@
 {
   "name": "NodeJS Milkcocoa Heroku Button",
   "description": "NodeJS Milkcocoa Heroku Button",
-  "repository": "https://github.com/kiyopikko/heroku-milkcocoa-api",
+  "repository": "https://github.com/kiyopikko/heroku-milkcocoa-api#getData",
   "logo": "http://node-js-sample.herokuapp.com/node.svg",
   "keywords": ["node", "express", "milkcocoa"],
   "env": {
