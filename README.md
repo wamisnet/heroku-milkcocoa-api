@@ -10,7 +10,7 @@ HerokuでNodeJS(Express)をベースにした、シンプルなMilkcocoa連携�
 
 ### `get()`と`stream()`が使えるやつ
 
-[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/kiyopikko/heroku-milkcocoa-api#getData)
+[![Deploy](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy?template=https://github.com/kiyopikko/heroku-milkcocoa-api/tree/getData)
 
 ## 参考記事
 
