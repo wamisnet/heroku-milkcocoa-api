@@ -1,4 +1,6 @@
 // JSONファイルの読み込み（ローカル用）/////////////////////////////////
+var https = require('https');
+
 var fs = require('fs');
 var setting = {};
 var MILKCOCOA_APP_ID = "";
@@ -80,6 +82,36 @@ app.get('/push', function(request, response) {
         }
     }
     sampleDataStore.push({v : sendValue});
+});
+
+app.get('/get', function(request, response) {
+    // 内部のログ
+    console.log(request.query);
+    if(!request.query.id) return;
+    sampleDataStore.get(request.query.id, function(err, datum){
+        if(err){
+            response.send(err);
+            return;
+        }
+        response.send(JSON.stringify(datum));
+    });
+});
+
+app.get('/stream', function(request, response) {
+    // 内部のログ
+    console.log(request.query);
+    request.query.size = request.query.size || 50;
+    request.query.sort = request.query.sort || 'desc';
+
+    var stream = sampleDataStore.stream().size(request.query.size).sort(request.query.sort);
+
+    stream.next(function(err, data){
+        if(err){
+            response.send(err);
+            return;
+        }
+        response.send(JSON.stringify(data));
+    });
 });
 
 app.listen(app.get('port'), function() {
