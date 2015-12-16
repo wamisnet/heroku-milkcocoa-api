@@ -44,6 +44,10 @@ app.get('/', function(request, response) {
     response.send('Hello Milkcocoa!');
 });
 
+app.post('/push',function(request, response) {
+    sampleDataStore.push(request.body);
+});
+
 app.get('/push', function(request, response) {
 
     var date = new Date();
