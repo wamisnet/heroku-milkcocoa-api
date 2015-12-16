@@ -46,8 +46,7 @@ app.get('/', function(request, response) {
 
 app.post('/push',function(request, response) {
     // x-www-form-urlencodedで
-    var body = JSON.parse(request.body);
-    sampleDataStore.push(body);
+    sampleDataStore.push({v:request.body});
     response.send('back');
 });
 
