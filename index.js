@@ -45,7 +45,9 @@ app.get('/', function(request, response) {
 });
 
 app.post('/push',function(request, response) {
-    sampleDataStore.push(request.body);
+    // x-www-form-urlencodedで
+    var body = JSON.parse(request.body);
+    sampleDataStore.push(body);
     response.send('back');
 });
 
