@@ -46,6 +46,7 @@ app.get('/', function(request, response) {
 
 app.post('/push',function(request, response) {
     sampleDataStore.push(request.body);
+    response.send('back');
 });
 
 app.get('/push', function(request, response) {
