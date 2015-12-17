@@ -48,45 +48,25 @@ app.post('/push',function(request, response) {
     // application/json
     console.log(request.body);
     sampleDataStore.push(request.body);
-    response.send('back');
+    response.send('pushed!');
 });
 
-app.get('/push', function(request, response) {
+app.post('/send',function(request, response) {
+    // application/json
+    console.log(request.body);
+    sampleDataStore.send(request.body);
+    response.send('sended!');
+});
 
-    var date = new Date();
-    var hour = date.getHours();
+app.post('/set',function(request, response) {
+    // application/json
+    console.log(request.body);
 
-    response.send(hour+'');
-    // 内部のログ
-    console.log('[push datastore : ' + MILKCOCOA_DATASTORE_ID + ']');
-    console.log(request.query);
-    var sendValue = null;  // v値のデフォルトは null
-    if(request.query.v){
-        var sendValueType = request.query.type || 'string';
-        sendValueType = sendValueType.toLowerCase();
+    var data_id = request.body.id;
+    var data_params = request.body.params;
 
-        switch(request.query.type){
-            case 'string':
-                sendValue = request.query.v;
-                break;
-            case 'number':
-                sendValue = Number(request.query.v);
-                break;
-            case 'boolean':
-                sendValue = !!request.query.v;
-                break;
-            case 'bool':
-                sendValue = !!request.query.v;
-                break;
-            case 'object':
-                sendValue = JSON.parse(request.query.v);
-                break;
-            default:
-                sendValue = request.query.v;
-                break;
-        }
-    }
-    sampleDataStore.push({v : sendValue});
+    sampleDataStore.set(data_id, data_params);
+    response.send('setted!');
 });
 
 app.listen(app.get('port'), function() {
