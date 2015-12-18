@@ -46,26 +46,39 @@ app.get('/', function(request, response) {
 
 app.post('/push',function(request, response) {
     // application/json
-    console.log(request.body);
-    sampleDataStore.push(request.body);
+    console.log(request);
+    if(!!request.body){
+        console.log('+++++body');
+        if(Object.keys(request.body).length > 0){
+            console.log('+++++pushed');
+            sampleDataStore.push(request.body);
+        }
+    }
     response.send('pushed!');
 });
 
 app.post('/send',function(request, response) {
     // application/json
-    console.log(request.body);
-    sampleDataStore.send(request.body);
+    console.log(request);
+    if(!!request.body){
+        if(Object.keys(request.body).length > 0){
+            sampleDataStore.send(request.body);
+        }
+    }
     response.send('sended!');
 });
 
 app.post('/set',function(request, response) {
     // application/json
-    console.log(request.body);
 
-    var data_id = request.body.id;
-    var data_params = request.body.params;
+    if(!!request.body){
+        if(Object.keys(request.body).length > 0){
+            var data_id = request.body.id;
+            var data_params = request.body.params;
 
-    sampleDataStore.set(data_id, data_params);
+            sampleDataStore.set(data_id, data_params);
+        }
+    }
     response.send('setted!');
 });
 
