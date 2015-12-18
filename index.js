@@ -37,49 +37,39 @@ var app = express();
 
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/public'));
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(bodyParser.json());
+
+var urlencodedParser = bodyParser.urlencoded({ extended: true })
+var jsonParser = bodyParser.json()
 
 app.get('/', function(request, response) {
     response.send('Hello Milkcocoa!');
 });
 
-app.post('/push',function(request, response) {
+app.post('/push', jsonParser, function(request, response) {
     // application/json
-    console.log(request);
-    if(!!request.body){
-        console.log('+++++body');
-        if(Object.keys(request.body).length > 0){
-            console.log('+++++pushed');
-            sampleDataStore.push(request.body);
-        }
-    }
-    response.send('pushed!');
+    if (!request.body) return response.sendStatus(400)
+
+    sampleDataStore.push(request.body);
+    return response.sendStatus(200);
 });
 
-app.post('/send',function(request, response) {
+app.post('/send', jsonParser, function(request, response) {
     // application/json
-    console.log(request);
-    if(!!request.body){
-        if(Object.keys(request.body).length > 0){
-            sampleDataStore.send(request.body);
-        }
-    }
-    response.send('sended!');
+    if (!request.body) return response.sendStatus(400)
+
+    sampleDataStore.send(request.body);
+    return response.sendStatus(200);
 });
 
-app.post('/set',function(request, response) {
+app.post('/set', jsonParser, function(request, response) {
     // application/json
+    if (!request.body) return response.sendStatus(400)
 
-    if(!!request.body){
-        if(Object.keys(request.body).length > 0){
-            var data_id = request.body.id;
-            var data_params = request.body.params;
+    var data_id = request.body.id;
+    var data_params = request.body.params;
+    sampleDataStore.set(data_id, data_params);
 
-            sampleDataStore.set(data_id, data_params);
-        }
-    }
-    response.send('setted!');
+    return response.sendStatus(200);
 });
 
 app.listen(app.get('port'), function() {
